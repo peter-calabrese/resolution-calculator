@@ -3,15 +3,20 @@ import {useState} from "react";
 
 interface measurements {
   scaledMeasurements: string;
-  width?: number | undefined;
-  height?: number | undefined;
-  scale?: number | undefined;
+  width: number
+  height: number
+  scale: number
 }
 
 function App() {
-  const [measurements, setMeasurements] = useState<measurements>();
+  const [measurements, setMeasurements] = useState<measurements>({
+    scaledMeasurements: '',
+    height: 0,
+    width: 0,
+    scale: 0,
+  });
 
-  const updateData = (key: string, value: number) => {
+  const updateData = (key: string, value: string) => {
     setMeasurements(prevState => ({
       ...prevState,
       [key]: value
@@ -19,10 +24,10 @@ function App() {
   }
 
   const calcResolution = () => {
-    const scaleFactor: number = measurements?.scale / 100;
+    const scaleFactor: number = measurements.scale / 100;
     console.log(scaleFactor)
-    const scaledWidth: number = measurements?.width / scaleFactor;
-    const scaledHeight: number = measurements?.height / scaleFactor;
+    const scaledWidth: number = measurements.width / scaleFactor;
+    const scaledHeight: number = measurements.height / scaleFactor;
 
     setMeasurements(prevState => ({
       ...prevState,
